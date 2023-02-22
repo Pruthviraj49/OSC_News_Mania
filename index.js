@@ -177,24 +177,29 @@ const fetchQueryNews = async () => {
     displayNews();
 }
 
+
+
 function displayNews() {
 
     newsdetails.innerHTML = "";
 
-    // if(newsDataArr.length == 0) {
-    //     newsdetails.innerHTML = "<h5>No data found.</h5>"
-    //     return;
-    // }
+    if (newsDataArr.length == 0) {
+        newsdetails.innerHTML = "<h5>No data found.</h5>"
+        return;
+    }
+
+    var row = document.createElement('div');
+    row.className = "row row-cols-1 row-cols-md-4 g-3";
 
     newsDataArr.forEach(news => {
 
         var date = news.publishedAt.split("T");
 
         var col = document.createElement('div');
-        col.className = "col-sm-12 col-md-4 col-lg-3 p-2 card";
+        col.className = "col p-2 card";
 
         var card = document.createElement('div');
-        card.className = "p-2";
+        card.className = "p-2 ";
 
         var image = document.createElement('img');
         image.setAttribute("height", "matchparent");
@@ -230,9 +235,10 @@ function displayNews() {
         card.appendChild(cardBody);
 
         col.appendChild(card);
-
-        newsdetails.appendChild(col);
+        row.appendChild(col);
     });
 
+    newsdetails.appendChild(row);
 }
+
 
